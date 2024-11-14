@@ -1,5 +1,5 @@
 import React from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { Clock, AlertCircle } from 'lucide-react';
 import type { Task, TaskStatus } from '../../types/project';
 import { format } from 'date-fns';
