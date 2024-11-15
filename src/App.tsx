@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
@@ -7,7 +6,7 @@ import CompanyDetails from './pages/CompanyDetails';
 import Projects from './pages/Projects';
 import Quotations from './pages/Quotations';
 // import Invoices from './pages/Invoices';
-// import TimeTracking from './pages/TimeTracking';
+import TimeTracking from './pages/TimeTracking';
 
 function App() {
   return (
@@ -21,7 +20,7 @@ function App() {
           <Route path="projects" element={<Projects />} />
           <Route path="quotations" element={<Quotations />} />
           {/* <Route path="invoices" element={<Invoices />} /> */}
-          {/* <Route path="time-tracking" element={<TimeTracking />} /> */}
+          <Route path="time-tracking" element={<TimeTracking />} />
         </Route>
       </Routes>
     </BrowserRouter>
