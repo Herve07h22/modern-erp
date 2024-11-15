@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Plus, Search, Filter, FileText, Download } from 'lucide-react';
 import QuotationEditor from '../components/quotations/QuotationEditor';

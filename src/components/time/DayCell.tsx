@@ -1,5 +1,5 @@
 import { format, isWeekend, isSameMonth } from 'date-fns';
-import type { TimeRecord } from '../types/project';
+import type { TimeRecord } from '../../types/project';
 
 interface DayCellProps {
   day: Date;

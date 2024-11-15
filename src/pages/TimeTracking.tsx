@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import { timeTrackingStore } from '../store/timeTrackingStore';
-import { TimeTrackingSummary } from '../components/TimeTrackingSummary';
-import { TimeNavigationHeader } from '../components/TimeNavigationHeader';
-import { DayCell } from '../components/DayCell';
+import { TimeTrackingSummary } from '../components/time/TimeTrackingSummary';
+import { TimeNavigationHeader } from '../components/time/TimeNavigationHeader';
+import { DayCell } from '../components/time/DayCell';
 
 const TimeTracking = observer(() => {
 
