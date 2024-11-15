@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Plus, Search } from 'lucide-react';
+import { Plus, Search, X } from 'lucide-react';
 import KanbanBoard from '../components/projects/KanbanBoard';
 import TaskEditor from '../components/projects/TaskEditor';
 import TimeTracker from '../components/projects/TimeTracker';
@@ -65,12 +65,15 @@ export default function Projects() {
   const [searchParams] = useSearchParams();
   const companyId = searchParams.get('company');
   
+  const [isTaskPanelVisible, setIsTaskPanelVisible] = useState(false);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const [project] = useState<Project>(mockProject);
+  const [project, setProject] = useState<Project>(mockProject);
 
   const handleTaskMove = (taskId: string, newStatus: TaskStatus) => {
     // In real app, update task status through API
     console.log('Moving task', taskId, 'to', newStatus);
+    const updatedTasks = project.tasks.map(task => task.id === taskId ? { ...task, status: newStatus } : task);
+    setProject({ ...project, tasks: updatedTasks });
   };
 
   const handleTaskContentChange = (content: string) => {
@@ -89,6 +92,21 @@ export default function Projects() {
     console.log('Deleting time record', recordId);
   };
 
+  const handleTaskSelect = (task: Task) => {
+    setSelectedTask(task);
+    setTimeout(() => {
+      setIsTaskPanelVisible(true);
+    }, 10);
+  };
+
+  const handleCloseTask = () => {
+    setIsTaskPanelVisible(false);
+    // On attend la fin de l'animation avant de supprimer la tâche
+    setTimeout(() => {
+      setSelectedTask(null);
+    }, 300);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -104,8 +122,6 @@ export default function Projects() {
         </button>
       </div>
 
-      <div className="flex gap-4 ">
-        <div className={`flex-1 overflow-x-auto ${selectedTask ? 'max-w-screen-md	' : ''}`}>
           <div className="mb-6">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -120,34 +136,58 @@ export default function Projects() {
           <KanbanBoard
             tasks={project.tasks}
             onTaskMove={handleTaskMove}
-            onTaskClick={setSelectedTask}
+            onTaskClick={handleTaskSelect}
           />
-        </div>
 
         {selectedTask && (
-          <div className="w-96 bg-white p-6 rounded-lg shadow-lg space-y-6 flex-1 transition">
-            <div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-1">
-                {selectedTask.title}
-              </h2>
-              <p className="text-sm text-gray-500">
-                Created {new Date(selectedTask.createdAt).toLocaleDateString()}
-              </p>
+          <>
+            <div 
+              className={`
+                fixed inset-0 bg-black transition-opacity duration-300
+                ${isTaskPanelVisible ? 'bg-opacity-25' : 'bg-opacity-0 pointer-events-none'}
+              `}
+              onClick={handleCloseTask}
+            />
+            <div 
+              className={`
+                fixed right-0 top-12 w-[500px] h-[calc(100vh-4rem)]
+                bg-white shadow-2xl overflow-y-auto
+                transform transition-transform duration-300 ease-out
+                ${isTaskPanelVisible ? 'translate-x-0' : 'translate-x-full'}
+              `}
+            >
+              <div className="p-6 space-y-6">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    {selectedTask.title}
+                  </h2>
+                  <button 
+                    onClick={handleCloseTask}
+                    className="p-1 hover:bg-gray-100 rounded-full"
+                  >
+                    <X className="w-5 h-5 text-gray-500" />
+                  </button>
+                </div>
+                
+                <p className="text-sm text-gray-500">
+                  Created {new Date(selectedTask.createdAt).toLocaleDateString()}
+                </p>
+
+                <TaskEditor
+                  content={selectedTask.content}
+                  onChange={handleTaskContentChange}
+                />
+
+                <TimeTracker
+                  records={selectedTask.timeRecords}
+                  onAddRecord={handleAddTimeRecord}
+                  onDeleteRecord={handleDeleteTimeRecord}
+                />
+              </div>
             </div>
-
-            <TaskEditor
-              content={selectedTask.content}
-              onChange={handleTaskContentChange}
-            />
-
-            <TimeTracker
-              records={selectedTask.timeRecords}
-              onAddRecord={handleAddTimeRecord}
-              onDeleteRecord={handleDeleteTimeRecord}
-            />
-          </div>
+          </>
         )}
-      </div>
+
     </div>
   );
 }
