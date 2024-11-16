@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { TimeRecord } from '../types/project';
+import { TimeRecord } from './TimeRecord';
 import { format } from 'date-fns';
 import { 
   startOfWeek, 
@@ -14,10 +14,8 @@ import {
   isWeekend,
   isSameMonth
 } from 'date-fns';
-const fakeTimeRecords: TimeRecord[] = [
-    { id: '1', taskId: '1', date: '2024-11-15', hours: 3, comment: 'Lorem ipsum dolor sit amet', userId: '1', createdAt: '2024-11-15T00:00:00.000Z' },
-    { id: '2', taskId: '2', date: '2024-11-15', hours: 2, comment: 'Lorem ipsum dolor sit amet', userId: '1', createdAt: '2024-11-15T00:00:00.000Z' },
-];
+import { AppState } from '../App';
+import { Dependencies } from '../../api/Dependencies';
 
 export class TimeTrackingStore {
   currentDate = new Date();
@@ -25,16 +23,16 @@ export class TimeTrackingStore {
   isLoading = true;
   timeRecords: TimeRecord[] = [];
 
-  constructor() {
+  constructor(private dependencies: Dependencies, private app:AppState) {
     makeAutoObservable(this);
     this.initialize();
+    this.app.logger.info('TimeTrackingStore initialized');
   }
 
-  private async initialize() {
+  async initialize() {
     try {
-      // Chargez vos données ici
-      // Par exemple : this.timeRecords = await fetchTimeRecords();
-      this.timeRecords = fakeTimeRecords;
+     
+      this.timeRecords = await this.dependencies.getTimeRecords();
       this.isLoading = false;
     } catch (error) {
       console.error('Erreur lors du chargement des données:', error);
@@ -116,4 +114,3 @@ export class TimeTrackingStore {
   }
 }
 
-export const timeTrackingStore = new TimeTrackingStore(); 

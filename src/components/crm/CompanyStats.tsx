@@ -1,6 +1,6 @@
 import React from 'react';
 import { BarChart3, FileText, FolderKanban, Receipt } from 'lucide-react';
-import type { CompanyStats } from '../../types/crm';
+import type { CompanyStats } from '../../store/domain/crm/crm';
 
 interface CompanyStatsProps {
   stats: CompanyStats;

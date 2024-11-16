@@ -1,7 +1,7 @@
 import React from 'react';
 import { Building2, Globe, MapPin, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import type { Company } from '../../types/crm';
+import type { Company } from '../../store/domain/crm/crm';
 
 interface CompanyCardProps {
   company: Company;

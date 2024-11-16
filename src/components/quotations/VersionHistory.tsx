@@ -1,7 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { Clock, Send, Check, X } from 'lucide-react';
-import type { QuotationVersion } from '../../types/quotation';
+import type { QuotationVersion } from '../../store/domain/qutotations/quotation';
 
 interface VersionHistoryProps {
   versions: QuotationVersion[];

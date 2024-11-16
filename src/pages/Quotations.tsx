@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Plus, Search, Filter, FileText, Download } from 'lucide-react';
+import { Plus, Download } from 'lucide-react';
 import QuotationEditor from '../components/quotations/QuotationEditor';
 import ItemList from '../components/quotations/ItemList';
 import VersionHistory from '../components/quotations/VersionHistory';
-import type { Quotation, QuotationItem, QuotationVersion } from '../types/quotation';
+import type { Quotation, QuotationItem, QuotationVersion } from '../store/domain/qutotations/quotation';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 

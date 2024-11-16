@@ -1,5 +1,5 @@
 import { Trash2, Plus } from 'lucide-react';
-import type { InvoiceItem } from '../../types/invoice';
+import type { InvoiceItem } from '../../store/domain/invoices/invoice';
 
 interface ItemListProps {
   items: InvoiceItem[];

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { format } from 'date-fns';
 import { Clock, Plus, Trash2 } from 'lucide-react';
-import type { TimeRecord } from '../../types/project';
+import type { TimeRecord } from '../../store/domain/projects/project';
 
 interface TimeTrackerProps {
   records: TimeRecord[];

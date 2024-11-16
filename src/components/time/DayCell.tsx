@@ -1,16 +1,16 @@
 import { format, isWeekend, isSameMonth } from 'date-fns';
-import type { TimeRecord } from '../../types/project';
+import type { TimeRecord } from '../../store/domain/projects/project';
 
 interface DayCellProps {
   day: Date;
-  currentDate: Date;
+  currentDate?: Date;
   records: TimeRecord[];
   dailyTotal:  number;
 }
 
 export const DayCell = ({ day, currentDate, records, dailyTotal }: DayCellProps) => {
   const isWeekendDay = isWeekend(day);
-  const isOutsideMonth = !isSameMonth(day, currentDate);
+  const isOutsideMonth = !!currentDate &&!isSameMonth(day, currentDate);
 
   return (
     <div 
@@ -47,12 +47,12 @@ export const DayCell = ({ day, currentDate, records, dailyTotal }: DayCellProps)
               key={record.id}
               className="text-sm p-2 rounded bg-blue-50 border border-blue-100"
             >
-              <div className="font-medium text-blue-900">
-                {record.hours}h
-              </div>
-              <div className="text-blue-700 truncate">
-                {record.comment}
-              </div>
+              <span className="font-medium text-blue-900">
+                {record.hours}h &nbsp;
+              </span>
+              <span className="text-blue-700 truncate">
+                | {record.taskName}
+              </span>
             </div>
           ))}
         </div>

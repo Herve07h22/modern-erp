@@ -1,6 +1,6 @@
 import React from 'react';
 import { Trash2, Plus } from 'lucide-react';
-import type { QuotationItem } from '../../types/quotation';
+import type { QuotationItem } from '../../store/domain/qutotations/quotation';
 
 interface ItemListProps {
   items: QuotationItem[];

@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import {  Download, Calendar } from 'lucide-react';
 import InvoiceEditor from '../components/invoices/InvoiceEditor';
 import ItemList from '../components/invoices/ItemList';
-import type { Invoice, InvoiceItem } from '../types/invoice';
+import type { Invoice, InvoiceItem } from '../store/domain/invoices/invoice';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { format } from 'date-fns';

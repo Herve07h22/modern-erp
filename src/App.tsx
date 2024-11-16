@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Layout from './components/time/Layout';
+import Layout from './components/layout/Layout';
 import Dashboard from './pages/Dashboard';
 import CRM from './pages/CRM';
 import CompanyDetails from './pages/CompanyDetails';
@@ -7,6 +7,11 @@ import Projects from './pages/Projects';
 import Quotations from './pages/Quotations';
 import TimeTracking from './pages/TimeTracking';
 import Invoices from './pages/Invoices';
+import { AppState } from './store/domain/App';
+import { TestDependencies } from './store/api/test/TestDependencies';
+
+
+const app = new AppState(new TestDependencies());
 
 function App() {
   return (
@@ -20,7 +25,7 @@ function App() {
           <Route path="projects" element={<Projects />} />
           <Route path="quotations" element={<Quotations />} />
           <Route path="invoices" element={<Invoices />} />
-          <Route path="time-tracking" element={<TimeTracking />} />
+          <Route loader={() => app.timeTrackingStore.initialize()} path="time-tracking" element={<TimeTracking timeTrackingStore={app.timeTrackingStore} />} />
         </Route>
       </Routes>
     </BrowserRouter>

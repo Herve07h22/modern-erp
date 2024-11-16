@@ -4,7 +4,7 @@ import { Plus, Search, X } from 'lucide-react';
 import KanbanBoard from '../components/projects/KanbanBoard';
 import TaskEditor from '../components/projects/TaskEditor';
 import TimeTracker from '../components/projects/TimeTracker';
-import type { Project, Task, TaskStatus, TimeRecord } from '../types/project';
+import type { Project, Task, TaskStatus, TimeRecord } from '../store/domain/projects/project';
 
 // Mock data
 const mockProject: Project = {

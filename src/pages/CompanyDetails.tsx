@@ -1,11 +1,10 @@
-import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { 
-  Building2, Globe, Mail, Phone, MapPin, 
-  FolderKanban, FileText, Receipt 
+import {
+  Building2, Globe, Mail, Phone, MapPin,
+  FolderKanban, FileText, Receipt
 } from 'lucide-react';
 import CompanyStats from '../components/crm/CompanyStats';
-import type { Company, CompanyStats as ICompanyStats } from '../types/crm';
+import type { Company, CompanyStats as ICompanyStats } from '../store/domain/crm/crm';
 
 // Mock data for demonstration
 const mockCompany: Company = {
@@ -195,13 +194,12 @@ function CompanyDetails() {
                 <div className="flex justify-between">
                   <dt className="text-sm text-gray-500">Status</dt>
                   <dd className="text-sm">
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      company.status === 'active'
-                        ? 'bg-green-100 text-green-800'
-                        : company.status === 'lead'
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${company.status === 'active'
+                      ? 'bg-green-100 text-green-800'
+                      : company.status === 'lead'
                         ? 'bg-yellow-100 text-yellow-800'
                         : 'bg-gray-100 text-gray-800'
-                    }`}>
+                      }`}>
                       {company.status.charAt(0).toUpperCase() + company.status.slice(1)}
                     </span>
                   </dd>

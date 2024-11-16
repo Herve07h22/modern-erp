@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Search, Filter } from 'lucide-react';
 import CompanyCard from '../components/crm/CompanyCard';
-import type { Company } from '../types/crm';
+import type { Company } from '../store/domain/crm/crm';
 
 // Mock data for demonstration
 const mockCompanies: Company[] = [

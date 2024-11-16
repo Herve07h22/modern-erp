@@ -1,4 +1,5 @@
-import { Company } from './crm';
+import { Company } from '../crm/crm';
+import { TimeRecord } from '../time/TimeRecord';
 
 export type TaskStatus = 'backlog' | 'todo' | 'in_progress' | 'review' | 'done';
 
@@ -30,12 +31,3 @@ export interface Task {
   updatedAt: string;
 }
 
-export interface TimeRecord {
-  id: string;
-  taskId: string;
-  date: string;
-  hours: number;
-  comment: string;
-  userId: string;
-  createdAt: string;
-}
